@@ -3,7 +3,7 @@ from tkinter import *
 
 import numpy as np 
 import cv2
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
 window = Tk()
 window.title("HaraKiri")
