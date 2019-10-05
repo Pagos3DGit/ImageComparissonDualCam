@@ -1,19 +1,31 @@
+import tkinter as tk
 from tkinter import *
 
 
-import numpy as np 
-import cv2
-cap = cv2.VideoCapture(0)
+master = Tk()
 
-window = Tk()
-window.title("HaraKiri")
+def callback():
+    print ("click!")
+    
+    
 
-# this is the window width/height
-window.geometry('600x350')
-cv2.imshow('window ', window(cap.read()) )
+class App(tk.Frame):
+   frame = Frame(width=768, height=576, bg="", colormap="new")
+   frame.pack()
+   b = Button(master, text="OK", command=callback)
+   b.pack()
 
-lbl = Label(window, text = "HaraKiri")
+   
 
+# create the application
+myapp = App()
 
-lbl.grid(column = 0, row =0)
-window.mainloop()
+#
+# here are method calls to the window manager class
+#
+
+myapp.master.title("My Do-Nothing Application")
+#myapp.master.size(1000, 400)
+
+# start the program
+myapp.mainloop()
