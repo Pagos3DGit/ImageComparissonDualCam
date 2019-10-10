@@ -1,0 +1,51 @@
+[1mdiff --git a/Source/CameraControllerMain.py b/Source/CameraControllerMain.py[m
+[1mindex 2575f8c..bb7ac82 100644[m
+[1m--- a/Source/CameraControllerMain.py[m
+[1m+++ b/Source/CameraControllerMain.py[m
+[36m@@ -1,7 +1,8 @@[m
+[32m+[m
+ import numpy as np [m
+ import cv2[m
+ [m
+[31m-cap = cv2.VideoCapture(1)[m
+[32m+[m[32mcap = cv2.VideoCapture(0)[m
+ [m
+ [m
+ while(True):[m
+[1mdiff --git a/Source/MainUI.py b/Source/MainUI.py[m
+[1mdeleted file mode 100644[m
+[1mindex deba50c..0000000[m
+[1m--- a/Source/MainUI.py[m
+[1m+++ /dev/null[m
+[36m@@ -1,19 +0,0 @@[m
+[31m-from tkinter import *[m
+[31m-[m
+[31m-[m
+[31m-import numpy as np [m
+[31m-import cv2[m
+[31m-cap = cv2.VideoCapture(1)[m
+[31m-[m
+[31m-window = Tk()[m
+[31m-window.title("HaraKiri")[m
+[31m-[m
+[31m-# this is the window width/height[m
+[31m-window.geometry('600x350')[m
+[31m-cv2.imshow('window ', window(cap.read()) )[m
+[31m-[m
+[31m-lbl = Label(window, text = "HaraKiri")[m
+[31m-[m
+[31m-[m
+[31m-lbl.grid(column = 0, row =0)[m
+[31m-window.mainloop()[m
+\ No newline at end of file[m
+[1mdiff --git a/Source/__init__.py b/Source/__init__.py[m
+[1mdeleted file mode 100644[m
+[1mindex e69de29..0000000[m
+[1mdiff --git a/Source/__pycache__/CameraControllerMain.cpython-37.pyc b/Source/__pycache__/CameraControllerMain.cpython-37.pyc[m
+[1mdeleted file mode 100644[m
+[1mindex 6a717d2..0000000[m
+Binary files a/Source/__pycache__/CameraControllerMain.cpython-37.pyc and /dev/null differ
+[1mdiff --git a/Source/__pycache__/MainUI.cpython-37.pyc b/Source/__pycache__/MainUI.cpython-37.pyc[m
+[1mdeleted file mode 100644[m
+[1mindex 55ff04b..0000000[m
+Binary files a/Source/__pycache__/MainUI.cpython-37.pyc and /dev/null differ
