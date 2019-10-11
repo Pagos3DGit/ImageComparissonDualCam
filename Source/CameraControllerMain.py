@@ -29,29 +29,54 @@ import sched, time
 
 
 cap = cv2.VideoCapture(0)
-master = Tk()
+
 
 outpath = "images/exportLib/STD.png"
 filename = "STD"
 
 
 
-'''
+
 
 def switch_pressed(event):
-    event.chip.output_pins[event.pin_num].turn_on()
     
+    ##Declare variables here
+    event.chip.output_pins[event.pin_num].turn_on()
+    expImg = 0
+    frame = cap.read()
     #############################ADD SWITCH FUNCTIONS HERE ######################
     
     if event.pin_num == 0 :
         vidstream()
         print(event.pin_num)
-    
+        
+        #capture image via button
+    elif event.pin_num == 1 :
+        
+        if expImg <=9:
+            expImg = "images/exportLib/{}.png".format(expImg)
+            cv2.imwrite(expImg, frame)
+            expImg +=1
+            
+            
+        elif expImg >9:
+            expImg =0
+            os.remove("images/exportLib/{}.png".format(expImg))
+            expImg = "images/exportLib/{}.png".format(expImg)
+            cv2.imwrite(expImg, frame)
+            expImg +=1
+            
+            
+        print("{} written!".format(expImg))
+        print(event.pin_num)
+        
+        
+        
 
     
 def switch_unpressed(event):
     event.chip.output_pins[event.pin_num].turn_off()
-
+  
 if __name__ == "__main__":
     pifacedigital = pifacedigitalio.PiFaceDigital()
 
@@ -60,7 +85,9 @@ if __name__ == "__main__":
         listener.register(i, pifacedigitalio.IODIR_ON, switch_pressed)
         listener.register(i, pifacedigitalio.IODIR_OFF, switch_unpressed)
     listener.activate()
-        '''
+           
+       
+        
     
 def imDiff():
     image_diff.compImg()
@@ -103,10 +130,11 @@ def vidstream():
                 
                 
             #####SAVE A PICTURE EVERY 2000 MILISECONDS
-        #elif cv2.waitKey(2000):                #img_name = "images/exportLib/opencv_frame_{}.png".format(img_counter)
-        #cv2.imwrite(img_name, frame)
-        # print("{} written!".format(img_name))
-        # img_counter += 1
+        elif cv2.waitKey(2000):
+            img_name = "images/exportLib/opencv_frame_{}.png".format(img_counter)
+            cv2.imwrite(img_name, frame)
+            print("{} written!".format(img_name))
+            img_counter += 1
           
     cap.release()
     cv2.destroyAllWindows()
@@ -118,6 +146,7 @@ def vidstream():
 
 class App(tk.Frame):
     
+   
    frame = Frame(width=700, height=400, bg="black", colormap="new")
    
    frame.pack()
@@ -141,11 +170,18 @@ class App(tk.Frame):
     
    #vidstream().frame.pack()
 
+    
+    
 myapp = App()
 myapp.master.title("My Do-Nothing Application")
 
 myapp.mainloop()
 myapp.destroy()
+
+myapp.wait() # program will wait here until exit_barrier releases
+listener.stop()
+sys.exit()
 # When everything done, release the capture
 cap.release()
 cv2.destroyAllWindows()
+
